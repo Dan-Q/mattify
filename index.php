@@ -155,6 +155,13 @@ if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('
     <input type="submit" value="Generate">
   </form>
 
+  <footer>
+    <p>
+      A <a href="https://things.danq.me/">thing</a> by <a href="https://danq.me/">Dan Q</a> |
+      <a href="https://github.com/Dan-Q/mattify">Source</a>
+    </p>
+  </footer>
+
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function(){
       const inOptions = document.querySelector('.in-options');
