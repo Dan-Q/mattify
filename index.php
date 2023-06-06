@@ -62,6 +62,10 @@ if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('
   }
 }
 
+// Default font sizes
+$top_size = $top_size ?? 16;
+$bottom_size = $bottom_size ?? 16;
+
 ?><!DOCTYPE html>
 <html>
 <head>
