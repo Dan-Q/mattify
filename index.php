@@ -11,15 +11,17 @@ function error( $message ){
   die();
 }
 
-if( $_POST['in'] ) {
-  // interpret parameters
-  if( ! in_array( $_POST['in'], array_keys( $files ) ) ) error( 'Invalid input file' );
-  $infile = realpath( 'in/' . $_POST['in'] . '.' . $infile_format );
-  $top = strtoupper( $_POST['top'] );
-  $top_size = intval( $_POST['top_size'] );
+// Generator; redirects after
+function generate( $in, $top, $top_size, $bottom, $bottom_size ) {
+  global $files, $infile_format, $outfile_format, $font_sizes;
+
+  if( ! in_array( $in, array_keys( $files ) ) ) error( 'Invalid input file' );
+  $infile = realpath( 'in/' . $in . '.' . $infile_format );
+  $top = strtoupper( $top );
+  $top_size = intval( $top_size );
   if( ! in_array( $top_size, $font_sizes ) ) error( 'Invalid top font size' );
-  $bottom = strtoupper( $_POST['bottom'] );
-  $bottom_size = intval( $_POST['bottom_size'] );
+  $bottom = strtoupper( $bottom );
+  $bottom_size = intval( $bottom_size );
   if( ! in_array( $bottom_size, $font_sizes ) ) error( 'Invalid bottom font size' );
   $hash = md5( implode(':', [ $infile, $top, $top_size, $bottom, $bottom_size ] ) );
 
@@ -32,7 +34,7 @@ if( $_POST['in'] ) {
     $bottom_file_name = tempnam( 'tmp', "{$hash}-bottom" );
     file_put_contents( $top_file_name, "1\n00:00:00,000 --> 05:00:00,000\n${top}" );
     file_put_contents( $bottom_file_name, "1\n00:00:00,000 --> 05:00:00,000\n{$bottom}" );
-    file_put_contents( "out/{$hash}.json", json_encode( [ $_POST['in'], $top, $top_size, $bottom, $bottom_size ] ) );
+    file_put_contents( "out/{$hash}.json", json_encode( [ $in, $top, $top_size, $bottom, $bottom_size ] ) );
     $cmd = "ffmpeg -y -i {$infile} -filter_complex \"subtitles={$bottom_file_name}:force_style='Alignment=2,Fontsize={$bottom_size}',subtitles={$top_file_name}:force_style='Alignment=6,Fontsize={$top_size}'\" -c:a copy {$outfile}";
     exec($cmd);
 
@@ -46,10 +48,18 @@ if( $_POST['in'] ) {
   die();
 }
 
+if( $_POST['in'] ) generate( $_POST['in'], $_POST['top'], $_POST['top_size'], $_POST['bottom'], $_POST['bottom_size'] );
+
 // Which one to show?
-if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('out') . '/' . $_GET['h'] . '.' . $outfile_format ) ) ) {
-  $show_file = "out/{$_GET['h']}." . $outfile_format;
+if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('out') . '/' . $_GET['h'] . '.json' ) ) ) {
   list( $in, $top, $top_size, $bottom, $bottom_size ) = json_decode( file_get_contents( "out/{$_GET['h']}.json" ) );
+  if( file_exists( realpath('out') . '/' . $_GET['h'] . '.' . $outfile_format ) ) {
+    // if mp4 file exists already, we can just show that
+    $show_file = "out/{$_GET['h']}." . $outfile_format;
+  } else {
+    // OTHERWISE we generate that based on the JSON and loop around again
+    generate( $in, $top, $top_size, $bottom, $bottom_size );
+  }
 }
 
 ?><!DOCTYPE html>
