@@ -7,5 +7,5 @@ of Matt, so I stripped the audio from them all and made this silly tool. There's
 Go to https://mattify.abnib.co.uk/. Click a video, enter some text, click generate, and see the output. Click the resulting video to download it as an `.mp4` file
 suitable for sending via WhatsApp or what-have-you.
 
-PHP code licensed under GPLv3. Videos are protected by copyright, but if you wanted to make this for your own friends you'd want to use your own videos anyway, right?
-Requires `ffmpeg`.
+PHP/CSS/JS/SVG code (all of which you'll find in `index.php`) licensed under GPLv3. Videos are protected by copyright, but if you wanted to make this for your own
+friends you'd want to use your own videos anyway, right? Requires `ffmpeg`.
