@@ -103,57 +103,59 @@ if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('
   </style>
 </head>
 <body>
-  <h1>Mattify</h1>
-  <?php if( $show_file ) { ?>
-    <p>
-      <a href="<?php echo $show_file; ?>" download>
-        <video src="<?php echo $show_file; ?>" autoplay loop></video>
-      </a>
-    </p>
-  <?php } ?>
+  <main>
+    <h1>Mattify</h1>
+    <?php if( $show_file ) { ?>
+      <p>
+        <a href="<?php echo $show_file; ?>" download>
+          <video src="<?php echo $show_file; ?>" autoplay loop></video>
+        </a>
+      </p>
+    <?php } ?>
 
-  <form method="post" action="./">
-    <h2>Generate</h2>
-    <p>
-      Video:
-    </p>
-    <ul class="in-options">
-      <?php foreach( $files as $file ) { ?>
-        <li>
-          <label for="in-<?php echo $file; ?>">
-            <input type="radio" class="in-up-radio" name="in" value="<?php echo $file; ?>" id="in-<?php echo $file; ?>"<?php if($in == $file) echo ' checked'; ?>>
-            <video src="in/<?php echo $file; ?>.webm" loop></video>
-          </label>
-        </li>
-        <option value="<?php echo $file; ?>"><?php echo $desc; ?></option>
-      <?php } ?>
-    </ul>
-    <p>
-      <label for="top">Top text:</label>
-      <textarea name="top" id="top"><?php echo htmlspecialchars( $top ); ?></textarea>
-    </p>
-    <p>
-      <label for="top_size">Top font size:</label>
-      <select name="top_size" id="top_size">
-        <?php foreach( $font_sizes as $font_size ) { ?>
-          <option<?php if($top_size == $font_size) echo ' selected'; ?>><?php echo $font_size; ?></option>
+    <form method="post" action="./">
+      <h2>Generate</h2>
+      <p>
+        Video:
+      </p>
+      <ul class="in-options">
+        <?php foreach( $files as $file ) { ?>
+          <li>
+            <label for="in-<?php echo $file; ?>">
+              <input type="radio" class="in-up-radio" name="in" value="<?php echo $file; ?>" id="in-<?php echo $file; ?>"<?php if($in == $file) echo ' checked'; ?>>
+              <video src="in/<?php echo $file; ?>.webm" loop></video>
+            </label>
+          </li>
+          <option value="<?php echo $file; ?>"><?php echo $desc; ?></option>
         <?php } ?>
-      </select>
-    </p>
-    <p>
-      <label for="bottom">Bottom text:</label>
-      <textarea name="bottom" id="bottom"><?php echo htmlspecialchars( $bottom ); ?></textarea>
-    </p>
-    <p>
-      <label for="bottom_size">Bottom font size:</label>
-      <select name="bottom_size" id="bottom_size">
-        <?php foreach( $font_sizes as $font_size ) { ?>
-          <option<?php if($bottom_size == $font_size) echo ' selected'; ?>><?php echo $font_size; ?></option>
-        <?php } ?>
-      </select>
-    </p>
-    <input type="submit" value="Generate">
-  </form>
+      </ul>
+      <p>
+        <label for="top">Top text:</label>
+        <textarea name="top" id="top"><?php echo htmlspecialchars( $top ); ?></textarea>
+      </p>
+      <p>
+        <label for="top_size">Top font size:</label>
+        <select name="top_size" id="top_size">
+          <?php foreach( $font_sizes as $font_size ) { ?>
+            <option<?php if($top_size == $font_size) echo ' selected'; ?>><?php echo $font_size; ?></option>
+          <?php } ?>
+        </select>
+      </p>
+      <p>
+        <label for="bottom">Bottom text:</label>
+        <textarea name="bottom" id="bottom"><?php echo htmlspecialchars( $bottom ); ?></textarea>
+      </p>
+      <p>
+        <label for="bottom_size">Bottom font size:</label>
+        <select name="bottom_size" id="bottom_size">
+          <?php foreach( $font_sizes as $font_size ) { ?>
+            <option<?php if($bottom_size == $font_size) echo ' selected'; ?>><?php echo $font_size; ?></option>
+          <?php } ?>
+        </select>
+      </p>
+      <input type="submit" value="Generate">
+    </form>
+  </main>
 
   <footer>
     <p>
