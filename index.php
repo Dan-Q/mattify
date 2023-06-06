@@ -164,6 +164,7 @@ $bottom_size = $bottom_size ?? 16;
   <footer>
     <p>
       A <a href="https://things.danq.me/">thing</a> by <a href="https://danq.me/">Dan Q</a> |
+      for <a href="https://abnib.co.uk/">Abnib</a> |
       <a href="https://github.com/Dan-Q/mattify">Source</a>
     </p>
   </footer>
