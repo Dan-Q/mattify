@@ -207,7 +207,7 @@ $bottom_size = $bottom_size ?? 16;
     <section class="explanation">
       <h2>What and Why?</h2>
       <p>
-        If all started when I was backing up my WhatsApp messages and discovered that I had, for some reason, <a href="in/website-game.webm">a video</a> of
+        It all started when I was backing up my WhatsApp messages and discovered that I had, for some reason, <a href="in/website-game.webm">a video</a> of
         my friend Matt repeating "this could be a web game". I can't recall the context, but it was clearly something to do with my habit of making
         stupid webby interactives. It turned out that I had a <em>lot</em> of portrait videos of Matt, so I stripped the audio from them all and made this
         silly tool. There's a couple of other people available too.
