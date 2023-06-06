@@ -80,8 +80,15 @@ if( ( preg_match('/^[0-9a-f]{32}$/', $_GET['h'] ) ) && ( file_exists( realpath('
       outline: 4px solid blue;
       outline-offset: 2px;
     }
+    label {
+      display: block;
+    }
     textarea {
       text-transform: uppercase;
+      text-transform: uppercase;
+      min-width: 60ch;
+      min-height: 7ch;
+      resize: vertical;
     }
   </style>
 </head>
